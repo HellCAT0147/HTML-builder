@@ -20,7 +20,8 @@ async function doReadDir(folderPath) {
     for (const smth of smths) {
       if (smth.isFile()) {
         const size = await returnStatSize(smth.name);
-        const lastIndexDot = smth.name.split('').lastIndexOf('.');
+        let lastIndexDot = smth.name.split('').lastIndexOf('.');
+        if (lastIndexDot === -1) lastIndexDot = 999;
         const name = smth.name.substring(0, lastIndexDot);
         
         console.log(`${name} - ${extname(smth.name).slice(1)} - ${size}b`);
